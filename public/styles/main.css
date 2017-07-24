@@ -1,0 +1,16 @@
+h1 {
+color:pink;
+/*font-size: 1.5em;*/
+}
+
+/*a {
+	color: green;
+}*/
+
+.container-fluid {
+	background-color: purple;
+	color: green;
+	/*position: fixed;*/
+	/*width: 90%;*/
+
+}

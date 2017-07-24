@@ -10,11 +10,12 @@ block content
 			else
 				header
 					h1= data.knowledge.title
-					h5 Knowledge bank items
+					h5 Published on
 						if data.knowledge.publishedDate
-							| on #{data.knowledge._.publishedDate.format('MMMM Do, YYYY')}
+							|   #{data.knowledge._.publishedDate.format('MMMM Do, YYYY')}
 						if data.knowledge.categories && data.knowledge.categories.length
-							| in
+							|  in
+							|
 							each cat, cat_i in data.knowledge.categories
 								a(href='/blog/' + cat.key)= cat.name
 								if cat_i < data.knowledge.categories.length - 1
@@ -24,6 +25,6 @@ block content
 						if data.knowledge.author
 							| by #{data.knowledge.author.name.first}
 				.knowledge
-					if data.knowledge.image.exists
+					//if data.knowledge.image.exists
 						.image-wrap: img(src=data.knowledge._.image.fit(750,450)).img-responsive
 					!= data.knowledge.content.full
