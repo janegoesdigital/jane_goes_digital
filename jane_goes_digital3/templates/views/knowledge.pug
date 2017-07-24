@@ -1,0 +1,74 @@
+extends ../layouts/default
+
+mixin knowledge(knowledge)
+	.knowledge(data-ks-editable=editable(user, { list: 'Knowledge', id: knowledge.id }))
+		h3: a(href='/knowledge/knowledge/' + knowledge.slug)= knowledge.title
+		p.lead.text-muted Posted
+			if knowledge.publishedDate
+				| on #{knowledge._.publishedDate.format('MMMM Do, YYYY')}
+			if knowledge.categories && knowledge.categories.length
+				| in
+				each cat, i in knowledge.categories
+					a(href='/knowledge/' + cat.key)= cat.name
+					if i < knowledge.categories.length - 1
+						| ,
+					else
+						|
+			if knowledge.author
+				| by #{knowledge.author.name.first}
+		
+		p!= knowledge.content.description
+		if knowledge.content.extended
+			p.read-more: a(href='/knowledge/knowledge/' + knowledge.slug) Read more...
+
+block intro
+	.container
+		h1= data.category ? data.category.name : 'Knowledge'
+
+block content
+	.container: .row
+		.col-sm-8.col-md-9
+			if filters.category && !data.category
+				h3.text-muted Invalid Category.
+			else
+				if data.knowledges.results.length
+					if data.knowledges.totalPages > 1
+						h4.text-weight-normal Showing
+							strong #{data.knowledges.first}
+							|  to
+							strong #{data.knowledges.last}
+							|  of
+							strong #{data.knowledges.total}
+							|  knowledges.
+					else
+						h4.text-weight-normal Showing #{utils.plural(data.knowledges.results.length, '* knowledge')}.
+					.blog
+						each knowledge in data.knowledges.results
+							+knowledge(knowledge)
+
+					if data.knowledges.totalPages > 1
+						ul.pagination
+							if data.knowledges.previous
+								li: a(href='?page=' + data.knowledges.previous): span.glyphicon.glyphicon-chevron-left
+							else
+								li.disabled: a(href='?page=' + 1): span.glyphicon.glyphicon-chevron-left
+							each p, i in data.knowledges.pages
+								li(class=data.knowledges.currentPage == p ? 'active' : null)
+									a(href='?page=' + (p == '...' ? (i ? data.knowledges.totalPages : 1) : p ))= p
+							if data.knowledges.next
+								li: a(href='?page=' + data.knowledges.next): span.glyphicon.glyphicon-chevron-right
+							else
+								li.disabled: a(href='?page=' + data.knowledges.totalPages): span.entypo.glyphicon.glyphicon-chevron-right
+				else
+					if data.category
+						h3.text-muted There are no knowledges in the category #{data.category.name}.
+					else
+						h3.text-muted There are no knowledges yet.
+
+		if data.categories.length
+			.col-sm-4.col-md-3
+				h2 Categories
+				.list-group(style='margin-top: 70px;')
+					a(href='/blog', class=!data.category ? 'active' : false).list-group-item All Categories
+					each cat in data.categories
+						a(href='/blog/' + cat.key, class=data.category && data.category.id == cat.id ? 'active' : false).list-group-item= cat.name

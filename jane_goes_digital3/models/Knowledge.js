@@ -31,8 +31,9 @@ Knowledge.add({
 });
 
 Knowledge.schema.virtual('content.full').get(function () {
-	return this.content.extended || this.content.brief;
+	return this.content.description || this.content.extended;
 });
 
 Knowledge.defaultColumns = 'title, status|20%,link|20%, content.description|20%, categories|20%';
+
 Knowledge.register();

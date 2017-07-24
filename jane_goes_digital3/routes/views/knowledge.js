@@ -12,8 +12,9 @@ exports = module.exports = function (req, res) {
 		category: req.params.category,
 	};
 	locals.data = {
-		posts: [],
+		knowledges: [],
 		categories: [],
+		types: [],
 	};
 
 	// Load all categories
@@ -30,7 +31,7 @@ exports = module.exports = function (req, res) {
 			// Load the counts for each category
 			async.each(locals.data.categories, function (category, next) {
 
-				keystone.list('Post').model.count().where('categories').in([category.id]).exec(function (err, count) {
+				keystone.list('Knowledge').model.count().where('categories').in([category.id]).exec(function (err, count) {
 					category.postCount = count;
 					next(err);
 				});
@@ -57,7 +58,7 @@ exports = module.exports = function (req, res) {
 	// Load the posts
 	view.on('init', function (next) {
 
-		var q = keystone.list('Post').paginate({
+		var q = keystone.list('Knowledge').paginate({
 			page: req.query.page || 1,
 			perPage: 10,
 			maxPages: 10,
@@ -73,11 +74,11 @@ exports = module.exports = function (req, res) {
 		}
 
 		q.exec(function (err, results) {
-			locals.data.posts = results;
+			locals.data.knowledges = results;
 			next(err);
 		});
 	});
 
 	// Render the view
-	view.render('blog');
+	view.render('knowledge');
 };

@@ -2,8 +2,8 @@ extends ../layouts/default
 
 mixin post(post)
 	.post(data-ks-editable=editable(user, { list: 'Post', id: post.id }))
-		h2: a(href='/blog/post/' + post.slug)= post.title
-		p.lead.text-muted Posted
+		h3: a(href='/blog/post/' + post.slug)= post.title
+		p.lead.text-muted Musings
 			if post.publishedDate
 				| on #{post._.publishedDate.format('MMMM Do, YYYY')}
 			if post.categories && post.categories.length
@@ -24,7 +24,7 @@ mixin post(post)
 
 block intro
 	.container
-		h1= data.category ? data.category.name : 'Blog'
+		h1= data.category ? data.category.name : 'My musings'
 
 block content
 	.container: .row
