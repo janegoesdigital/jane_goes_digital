@@ -16,7 +16,7 @@ mixin knowledge(knowledge)
 						|
 			if knowledge.author
 				| by #{knowledge.author.name.first}
-		
+
 		p!= knowledge.content.description
 		if knowledge.content.extended
 			p.read-more: a(href='/knowledge/knowledge/' + knowledge.slug) Read more...
@@ -69,6 +69,6 @@ block content
 			.col-sm-4.col-md-3
 				h2 Categories
 				.list-group(style='margin-top: 70px;')
-					a(href='/blog', class=!data.category ? 'active' : false).list-group-item All Categories
+					a(href='/knowledge', class=!data.category ? 'active' : false).list-group-item All Categories
 					each cat in data.categories
-						a(href='/blog/' + cat.key, class=data.category && data.category.id == cat.id ? 'active' : false).list-group-item= cat.name
+						a(href='/knowledge/' + cat.key, class=data.category && data.category.id == cat.id ? 'active' : false).list-group-item= cat.name
