@@ -1,16 +1,31 @@
-h1 {
-color:pink;
+h1, h2 {
+color: rgb(0,112,192);
 /*font-size: 1.5em;*/
 }
 
+body {
+	padding-top: 70px;
+}
+
+.jumbotron h1, .jumbotron .h1 {
+    color: rgb(0,112,192);
+		font-size: 2em;
+
+}
+.jumbotron p {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    font-weight: 200;
+		padding: 10px;
+}
+
 a {
-	color: green;
+	color: rgb(0,112,192);
 }
 
 .container-fluid {
 	background-color: purple;
-	color: green;
-	/*position: fixed;*/
+	/*height: 5em;*/
 	/*width: 90%;*/
 
 }
@@ -21,15 +36,18 @@ a {
 
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
     color: white;
-    background-color: blue;
+    background-color: rgb(0,112,192);
 }
 
 .navbar-default .navbar-nav>li>a {
     color: white;
+		background-color: purple;
 }
+
+
 
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: white;
-    background-color: blue;
+    background-color: rgb(0,112,192);
 }

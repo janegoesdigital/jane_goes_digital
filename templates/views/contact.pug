@@ -3,7 +3,7 @@ extends ../layouts/default
 block intro
 	.container
 		h1 Contact Us
-		
+
 block content
 	.container
 		if enquirySubmitted
@@ -14,7 +14,7 @@ block content
 					input(type='hidden', name='action', value='contact')
 					.form-group(class=validationErrors.name ? 'has-error' : null)
 						label Name
-						input(type='text', name='name.full', value=formData['name.full']).form-control
+						input(type='text', name='name', value=formData['name']).form-control
 					.form-group(class=validationErrors.email ? 'has-error' : null)
 						label Email
 						input(type='email', name='email', value=formData.email).form-control
