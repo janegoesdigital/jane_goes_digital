@@ -25,6 +25,7 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
+	MONGODB_URI:heroku_flt17g55:c2e9d4kf6fslk8n7m0c3ungkva@ds155160.mlab.com:55160/heroku_flt17g55
 });
 
 // Load your project's Models
