@@ -5,26 +5,50 @@ block content
 		article
 			p: a(href='/knowledge') &larr; back to the knowledge bank
 			hr
+			- var url = 'pug-test.html';
+			<a href='https://twitter.com/keystonejs' target='_blank'>follow @keystonejs</a>
+			<a href='www.google.com' > Google </a>
+
+
+
+
+
+
 			if !data.knowledge
 				h2 Oops...that's not an item in the knowledge bank!
 			else
 				header
-					h1= data.knowledge.title
+					h1 <a href='#{data.knowledge.link}'> #{data.knowledge.title } </a>
 					h5 Published on
 						if data.knowledge.publishedDate
-							|   #{data.knowledge._.publishedDate.format('MMMM Do, YYYY')}
+
+
 						if data.knowledge.categories && data.knowledge.categories.length
 							|  in
 							|
-							each cat, cat_i in data.knowledge.categories
-								a(href='/blog/' + cat.key)= cat.name
-								if cat_i < data.knowledge.categories.length - 1
+							each cat, cat in data.knowledge.categories
+								a(href='/knowledge/' + cat.key)= cat.name
+								if cat < data.knowledge.categories.length - 1
 									| ,
 								else
 									|
 						if data.knowledge.author
-							| by #{data.knowledge.author.name.first}
-				.knowledge
+							| by #{data.knowledge.author.name.first}.
+
+
+						p This is a sentence. This is the content type  #{data.knowledge.contentTypes}.
+
+						
+
+
+
+
+
+
+
+
+
+
 					//if data.knowledge.image.exists
 						.image-wrap: img(src=data.knowledge._.image.fit(750,450)).img-responsive
 					!= data.knowledge.content.full
