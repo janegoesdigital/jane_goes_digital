@@ -2,12 +2,13 @@ extends ../layouts/default
 
 mixin post(post)
 	.post(data-ks-editable=editable(user, { list: 'Post', id: post.id }))
+	.jumbotron
 		h3: a(href='/blog/post/' + post.slug)= post.title
 		p.lead.text-muted Musings
 			if post.publishedDate
-				| on #{post._.publishedDate.format('MMMM Do, YYYY')}
+				| &nbsp on #{post._.publishedDate.format('MMMM Do, YYYY')}
 			if post.categories && post.categories.length
-				| in
+				| &nbspon in
 				each cat, i in post.categories
 					a(href='/blog/' + cat.key)= cat.name
 					if i < post.categories.length - 1
@@ -16,7 +17,7 @@ mixin post(post)
 						|
 			if post.author
 				| by #{post.author.name.first}
-		if post.image.exists
+		//- if post.image.exists
 			img(src=post._.image.fit(160,160)).img.pull-right
 		p!= post.content.brief
 		if post.content.extended
@@ -27,8 +28,10 @@ block intro
 		h1= data.category ? data.category.name : 'My musings'
 
 block content
-	.container: .row
+	.container: .row 
+	
 		.col-sm-8.col-md-9
+	
 			if filters.category && !data.category
 				h3.text-muted Invalid Category.
 			else

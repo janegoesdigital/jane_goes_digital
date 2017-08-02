@@ -9,6 +9,7 @@ mixin knowledge(knowledge)
 			if knowledge.categories && knowledge.categories.length
 				| in
 				each cat, i in knowledge.categories
+					| by 
 					a(href='/knowledge/' + cat.key)= cat.name
 					if i < knowledge.categories.length - 1
 						| ,

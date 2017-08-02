@@ -6,16 +6,25 @@ exports = module.exports = function (req, res) {
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
 
+	console.log(locals);
+
 	// Init locals
+
 	locals.section = 'knowledge';
+
 	locals.filters = {
 		category: req.params.category,
 	};
+
+console.log(locals.filters);
+
 	locals.data = {
 		knowledges: [],
 		categories: [],
 		types: [],
 	};
+
+	// console.log("Locals:", locals.data.types);
 
 	// Load all categories
 	view.on('init', function (next) {
@@ -78,6 +87,21 @@ exports = module.exports = function (req, res) {
 			next(err);
 		});
 	});
+
+	view.on('init', (next) => {
+		if (req.params.type) {
+			keystone
+				.list('TypeCategory')
+				.model
+				.findOne({ key: locals.filters.type })
+				.exec((err, result) => {
+					locals.data.type = result;
+					next(err);
+				});
+		} else {
+			next();
+		}
+	})
 
 	// Render the view
 	view.render('knowledge');

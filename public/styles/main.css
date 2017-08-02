@@ -9,14 +9,14 @@ body {
 
 .jumbotron h1, .jumbotron .h1 {
     color: rgb(0,112,192);
-		font-size: 2em;
+		font-size: 1em;
 
 }
 .jumbotron p {
     margin-bottom: 15px;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 200;
-		padding: 10px;
+		/*padding: 10px;*/
 }
 
 a {
