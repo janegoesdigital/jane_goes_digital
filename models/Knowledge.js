@@ -14,7 +14,7 @@ var Knowledge = new keystone.List('Knowledge', {
 Knowledge.add({
 	title: { type: String, required: true },
 	link: { type: Types.Url},
-	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
+	state: { type: Types.Select, options: 'personal, draft, published, archived', default: 'draft', index: true },
 	contributor: { type: Types.Relationship, ref: 'User', index: true },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true },
@@ -34,6 +34,6 @@ Knowledge.schema.virtual('content.full').get(function () {
 	return this.content.description || this.content.extended;
 });
 
-Knowledge.defaultColumns = 'title, status|20%,link|20%, content.description|20%, categories|20%';
+Knowledge.defaultColumns = 'title, state |20%, categories|20%, contentTypes|20%, content.description|20%,';
 
 Knowledge.register();

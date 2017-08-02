@@ -10,22 +10,19 @@ block content
 			<a href='www.google.com' > Google </a>
 
 
-
-
-
-
 			if !data.knowledge
 				h2 Oops...that's not an item in the knowledge bank!
 			else
 				header
 					h1 <a href='#{data.knowledge.link}'> #{data.knowledge.title } </a>
-					h5 Published on
-						if data.knowledge.publishedDate
+					h4 Published on: 
+						if data.knowledge.publishedDate 
+							|  #{data.knowledge._.publishedDate.format('MMMM Do, YYYY')}.
 
 
 						if data.knowledge.categories && data.knowledge.categories.length
-							|  in
-							|
+							p About: 
+							
 							each cat, cat in data.knowledge.categories
 								a(href='/knowledge/' + cat.key)= cat.name
 								if cat < data.knowledge.categories.length - 1
@@ -35,8 +32,7 @@ block content
 						if data.knowledge.author
 							| by #{data.knowledge.author.name.first}.
 
-
-						p This is a sentence. This is the content type  #{data.contentTypes}.
+						p Type: #{data.contentTypes}.
 
 						
 

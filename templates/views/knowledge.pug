@@ -3,20 +3,30 @@ extends ../layouts/default
 mixin knowledge(knowledge)
 	.knowledge(data-ks-editable=editable(user, { list: 'Knowledge', id: knowledge.id }))
 		h3: a(href='/knowledge/knowledge/' + knowledge.slug)= knowledge.title
-		p.lead.text-muted Posted
+		p.lead.text-muted Posted: 
 			if knowledge.publishedDate
-				| on #{knowledge._.publishedDate.format('MMMM Do, YYYY')}
+				|  #{knowledge._.publishedDate.format('MMMM Do, YYYY')}.
 			if knowledge.categories && knowledge.categories.length
-				| in
+				
+			p.lead.text-muted About: 
 				each cat, i in knowledge.categories
-					| by 
 					a(href='/knowledge/' + cat.key)= cat.name
 					if i < knowledge.categories.length - 1
-						| ,
+						|; 
 					else
-						|
+						|.
 			if knowledge.author
 				| by #{knowledge.author.name.first}
+				
+			p.lead.text-muted Type: 
+				each cat, i in knowledge.contentTypes
+					a(href='/knowledge/' + cat.key)= cat.name
+					if i < knowledge.categories.length - 1
+						|; 
+					else
+						|.
+				
+
 
 		p!= knowledge.content.description
 		if knowledge.content.extended

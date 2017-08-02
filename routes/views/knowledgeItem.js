@@ -6,13 +6,18 @@ exports = module.exports = function (req, res) {
 	var locals = res.locals;
 
 	// Set locals
+	//Jane notes - locals are the data coming from the browser in the request
 	locals.section = 'knowledge';
+
+
 	locals.filters = {
 		knowledge: req.params.knowledge,
 	};
+
 	locals.data = {
 		knowledges: [],
 	};
+
 
 	// Load the current knowledge item
 	view.on('init', function (next) {
@@ -24,14 +29,20 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, result) {
 			locals.data.knowledge = result;
-			locals.data.contentTypes = result.contentTypes.map(type => type.name).join(', ')
+			console.log("Locals", locals.data)
 
-			console.log(locals.data.contentTypes);
-			console.log("Other results", result.contentTypes[0].name);
+			locals.data.contentTypes = result.contentTypes.map(type => type.name).join(', ');
+
+			// console.log("Second locals",locals.data);
+			console.log("Content types",locals.data.contentTypes);
+			// console.log("Other results", result.contentTypes[0].name);
 			next(err);
 		});
 
 	});
+
+
+
 
 	// Load other posts
 	view.on('init', function (next) {
@@ -40,7 +51,6 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			locals.data.knowledges = results;
-			console.log("Type results", results);
 			next(err);
 		});
 
