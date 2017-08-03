@@ -35,6 +35,7 @@ Enquiry.schema.post('save', function () {
 	}
 });
 
+
 Enquiry.schema.methods.sendNotificationEmail = function (callback) {
 	if (typeof callback !== 'function') {
 		callback = function () {};
